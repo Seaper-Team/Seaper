@@ -1,0 +1,8 @@
+{
+  "name": "Seaper Server Manager APIDoc",
+  "version": "0.0.1",
+  "description": "这是 Seaper 的官方 API 介绍文档！",
+  "title": "Seaper-APIDoc",
+  "url" : "http://127.0.0.1:8080/api",
+  "sampleUrl": "http://127.0.0.1:8080/api"
+}
