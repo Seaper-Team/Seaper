@@ -6,7 +6,7 @@
         \/     \/     \/|__|        \/
 ==============================================
 <--  Seaper Server Manager Powered By SWS  -->
-Version: 0.0.1
+Version: 0.0.2
 Author: Xiaoyi311
 Studio: SkyWorldStudio
 ==============================================
