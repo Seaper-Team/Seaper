@@ -57,7 +57,7 @@ Seaper Server Manager (简称 Seaper) 是一个**全新的，全能的，简洁�
 
 ## API
 
-所有关于 Seaper 的 API 均可在 [Seaper API](https://api.skyworldstudio.top/seaper) 查看
+所有关于 Seaper 的 API 均可在 [Seaper API](https://docs.skyworldstudio.top/seaper) 查看
 
 ## 贡献者
 
