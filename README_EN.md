@@ -12,13 +12,13 @@ Seaper Server Manager (Abbreviations Seapaper) is a **new, all-in-one, clean, cr
 
 ## Contents
 
-- [Security Issues](#Security Issues)
-- [Project Background](#Project Background)
-- [Installation method](#Installation method)
-- [Usage](#Usage methods)
+- [Security Issues](#Security-Issues)
+- [Project Background](#Project-Background)
+- [Installation method](#Installation-method)
+- [Usage](#Usage-methods)
 - [API](#Api)
 - [Contributors](#Contributors)
-- [open source protocol](#Open source protocol)
+- [open source protocol](#Open-source-protocol)
 
 ## Security Issues
 
