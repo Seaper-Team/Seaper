@@ -1,7 +1,5 @@
 package io.xiaoyi311.seaper.controller;
 
-import io.xiaoyi311.seaper.annotation.Permission;
-import io.xiaoyi311.seaper.exception.DataFileException;
 import io.xiaoyi311.seaper.model.User;
 import io.xiaoyi311.seaper.service.LangManager;
 import io.xiaoyi311.seaper.service.UserManager;
@@ -87,13 +85,10 @@ public class UserAuthController {
      *          "permissions": []
      *      }
      *  }
+     * @apiDeprecated 此方法已替换为 /user/info
      * @apiVersion 0.0.1
      */
-    @GetMapping("/info")
-    @Permission
-    public User info(HttpServletRequest request) throws DataFileException {
-        return UserManager.getBySession(request.getSession());
-    }
+    public void info(){}
 
     /**
      * 登出

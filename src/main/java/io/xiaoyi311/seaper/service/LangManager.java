@@ -89,14 +89,16 @@ public class LangManager {
 
         //获取节点
         JSONObject jobj = lang.getJSONObject("backend");
-        if(jobj == null){
-            return node;
-        }
 
         //获取语言文字
         String[] nodes = node.split("\\.");
         String data = null;
         for (int i = 0; i < nodes.length; i++) {
+            //如果出现找不到节点
+            if(jobj == null){
+                return node;
+            }
+
             if(i == nodes.length - 1){
                 data = jobj.getString(nodes[i]);
             }else {
