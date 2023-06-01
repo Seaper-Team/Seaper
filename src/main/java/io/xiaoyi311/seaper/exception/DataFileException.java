@@ -7,11 +7,11 @@ import lombok.extern.slf4j.Slf4j;
  * @author Xiaoyi311-
  */
 @Slf4j
-public class DataFileException extends Exception{
+public class DataFileException extends BaseException {
     /**
      * 实例化
      */
-    public DataFileException(String msg){
-        super(msg);
+    public DataFileException(String errorInfo){
+        this.data = errorInfo;
     }
 }

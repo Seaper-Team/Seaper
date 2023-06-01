@@ -15,7 +15,7 @@ import io.xiaoyi311.seaper.model.ErrorData;
  *      "data":"Permission Denied!"
  *  }
  */
-public class AccessDeniedException extends Exception{
+public class AccessDeniedException extends BaseException{
     /**
      * 错误数据
      */

@@ -57,14 +57,14 @@ public class LangController {
      * @apiVersion 0.0.1
      */
     @PostMapping("/init")
-    public String init(@RequestBody Map<String, String> user) throws BadRequestException {
+    public String init(@RequestBody Map<String, String> args) throws BadRequestException {
         //是否初始化过了
         if(UserManager.users.size() > 0){
             throw new BadRequestException(msg("user.initiated"));
         }
 
         //判断语言是否存在
-        String lang = user.get("lang");
+        String lang = args.get("lang");
         if(lang == null || !LangManager.langs.contains(lang)){
             throw new BadRequestException(msg("lang.notFound"));
         }

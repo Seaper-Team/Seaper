@@ -2,6 +2,7 @@ package io.xiaoyi311.seaper.controller.advice;
 
 import io.xiaoyi311.seaper.exception.AccessDeniedException;
 import io.xiaoyi311.seaper.exception.BadRequestException;
+import io.xiaoyi311.seaper.exception.BaseException;
 import io.xiaoyi311.seaper.model.ErrorData;
 import io.xiaoyi311.seaper.model.ResponseData;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +54,7 @@ public class ResponseFormat implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(value = BadRequestException.class)
     @ResponseBody
     public ResponseData<String> badRequest(BadRequestException e){
-        return new ResponseData<>(400, e.errorInfo);
+        return new ResponseData<>(400, e.data.toString());
     }
 
     /**
@@ -81,6 +82,15 @@ public class ResponseFormat implements ResponseBodyAdvice<Object> {
     @ResponseBody
     public ResponseData<String> pageNotFound(){
         return new ResponseData<>(404, ErrorData.C404.data);
+    }
+
+    /**
+     * 其他程序正常错误处理
+     */
+    @ExceptionHandler(BaseException.class)
+    @ResponseBody
+    public ResponseData<Object> otherAppException(BaseException e){
+        return new ResponseData<>(200, e.data);
     }
 
     /**

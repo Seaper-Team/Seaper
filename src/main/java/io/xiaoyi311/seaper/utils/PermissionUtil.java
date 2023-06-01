@@ -43,6 +43,12 @@ public class PermissionUtil {
         for (String userPermission : userPermissions) {
             //若带有泛指标志
             if(userPermission.contains("*")){
+                //如果为全部权限
+                if("*".equals(userPermission)){
+                    //直接跳过后面校验
+                    return true;
+                }
+
                 //获取对应拥有的权限节点
                 havaNodes.add(userPermission.replace(".*", ""));
             }

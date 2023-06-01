@@ -2,9 +2,8 @@ package io.xiaoyi311.seaper.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -37,8 +36,7 @@ import java.util.List;
  *      "data":"Password need md5!"
  *  }
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class User {
     /**
