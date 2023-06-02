@@ -9,4 +9,9 @@ public class BaseException extends Exception {
      * 错误数据
      */
     public Object data;
+
+    /**
+     * 错误码
+     */
+    public Integer status = 400;
 }

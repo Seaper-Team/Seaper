@@ -91,7 +91,13 @@ public class UserController {
      *      "data":{
      *          "total":1,
      *          "page":1,
-     *          "data":[]
+     *          "data":[{
+     *              "uuid": "00000000-0000-0000-0000-000000000000",
+     *              "username": "test",
+     *              "password": "testPassword",
+     *              "registerTime": 0,
+     *              "permissions": []
+     *          }]
      *      }
      *  }
      * @apiVersion 0.0.1

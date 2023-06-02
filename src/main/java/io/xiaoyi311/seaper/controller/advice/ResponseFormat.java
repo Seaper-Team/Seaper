@@ -90,7 +90,7 @@ public class ResponseFormat implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(BaseException.class)
     @ResponseBody
     public ResponseData<Object> otherAppException(BaseException e){
-        return new ResponseData<>(200, e.data);
+        return new ResponseData<>(e.status, e.data);
     }
 
     /**
