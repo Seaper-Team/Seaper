@@ -100,7 +100,7 @@ public class UserController {
      *          }]
      *      }
      *  }
-     * @apiVersion 0.0.1
+     * @apiVersion 0.0.2
      */
     @GetMapping("/list")
     @Permission("user.list")

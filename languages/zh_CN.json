@@ -12,7 +12,7 @@
     "console": {
       "createUser": "新建用户 -> ",
       "loginUser": "用户登录成功 -> {0} : {1}",
-      "langChange": "默认语言更改 ->"
+      "langChange": "默认语言更改 -> "
     },
     "dataFile": {
       "readUserDataError": "无法读取用户数据: ",
