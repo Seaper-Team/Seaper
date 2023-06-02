@@ -1,0 +1,44 @@
+{
+  "Name": "Seaper Language - English",
+  "Author": "SkyWorldStudio - Xiaoyi311",
+  "Version": "2",
+  "backend": {
+    "errorStatus": {
+      "unknown" : "Unknown Error",
+      "403": "Permission Denied!",
+      "404": "Oh no, Page Not Found :(",
+      "405": "You Can't Use This Method :("
+    },
+    "console": {
+      "createUser": "Create User -> ",
+      "loginUser": "User Login Successful -> {0} : {1}",
+      "langChange": "Deafault Language Changed ->"
+    },
+    "dataFile": {
+      "readUserDataError": "Read user data error: ",
+      "createUserDataError": "Create user data error: ",
+      "writeUserDataError": "Write user data error: ",
+      "readUsersDataError": "Can't Read Users Data: {0}, No user data will be loaded!",
+      "userDataLoaded": "User data reading completed, a total of {0} users loaded!",
+      "folderIsFile": "This is not a folder, It's a file! "
+    },
+    "user": {
+      "initiated": "Seaper Initiated!",
+      "loginRefuse": "Username or password error!",
+      "usernameNull": "Username cant be null!",
+      "passwordNull": "Password cant be null!",
+      "passwordNotMd5": "Password need md5!"
+    },
+    "lang": {
+      "notFound": "Language Not Found!"
+    },
+    "other": {
+      "pageShowTooSmall": "At least 1 element should be displayed on a page",
+      "pageTooSmall": "The minimum number of pages is 1",
+      "pageNotFound": "Page number not found"
+    }
+  },
+  "front": {
+    "test": "test"
+  }
+}
