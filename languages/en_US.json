@@ -25,20 +25,20 @@
       "folderIsFile": "This is not a folder, It's a file! "
     },
     "user": {
-      "initiated": "Seaper Initiated!",
-      "loginRefuse": "Username or password error!",
-      "usernameNull": "Username cant be null!",
-      "passwordNull": "Password cant be null!",
-      "passwordNotMd5": "Password need md5!",
-      "notFound": "User Not Found!",
-      "cantDelete": "User Cant Delete!",
-      "usernameExists": "Username Exists!"
+      "initiated": "Seaper has been initialized!",
+      "loginRefuse": "Wrong username or password!",
+      "usernameNull": "Username cannot be empty!",
+      "passwordNull": "Password cannot be empty!",
+      "passwordNotMd5": "The password requirement value is MD5!",
+      "notFound": "Users can't find it!",
+      "cantDelete": "This user cannot be deleted!",
+      "usernameExists": "Username already exists!"
     },
     "lang": {
       "notFound": "Language Not Found!"
     },
     "other": {
-      "pageShowTooSmall": "At least 1 element should be displayed on a page",
+      "pageShowTooSmall": "Display at least one element on a page",
       "pageTooSmall": "The minimum number of pages is 1",
       "pageNotFound": "Page number not found"
     }
