@@ -153,4 +153,18 @@ public class UserManagerTest {
             throw new Exception("退出登录失败");
         }
     }
+
+    /**
+     * 删除用户
+     */
+    @Test
+    @Order(8)
+    @DisplayName("删除用户")
+    void removeUser() throws Exception {
+        User user = UserManager.getBySession(TempSession.temp);
+        assert user != null;
+        if(!UserManager.remove(user.uuid, "Test Manager")){
+            throw new Exception("删除用户失败");
+        }
+    }
 }
