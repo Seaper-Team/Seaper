@@ -33,7 +33,7 @@ public class UserManagerTest {
                 "testPass",
                 PermissionUtil.Default
         );
-        UserManager.create(user);
+        UserManager.create(user, "Test Manager");
 
         log.info("UUID: " + user.uuid);
         log.info("用户名: " + user.username);
@@ -100,7 +100,7 @@ public class UserManagerTest {
         assert user != null;
         user.permissions.add("test.fuck");
         user.permissions.add("test2.*");
-        UserManager.set(user);
+        UserManager.set(user, "Test Manager");
         log.info("修改成功");
     }
 

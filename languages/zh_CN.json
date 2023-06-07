@@ -10,8 +10,9 @@
       "405": "你不能用这个方法请求此页面 :("
     },
     "console": {
-      "createUser": "新建用户 -> ",
-      "loginUser": "用户登录成功 -> {0} : {1}",
+      "createUser": "{0}: 新建用户 -> {1}",
+      "removeUser": "{0}: 删除用户 -> {1}",
+      "loginUser": "用户登录成功 -> {0}({1})",
       "langChange": "默认语言更改 -> "
     },
     "dataFile": {
@@ -19,6 +20,7 @@
       "createUserDataError": "无法新建用户数据: ",
       "writeUserDataError": "无法写入用户数据: ",
       "readUsersDataError": "无法读取用户数据集: {0}, 将没有任何用户数据被加载!",
+      "removeUserDataError": "无法删除用户数据集: {0}，用户无法删除!",
       "userDataLoaded": "用户数据读取完成, 共加载 {0} 个用户!",
       "folderIsFile": "这不是目录, 这是个文件! "
     },
@@ -27,7 +29,10 @@
       "loginRefuse": "用户名或密码错误!",
       "usernameNull": "用户名不能为空!",
       "passwordNull": "密码不能为空!",
-      "passwordNotMd5": "密码需要 MD5!"
+      "passwordNotMd5": "密码需要 MD5!",
+      "notFound": "用户找不到!",
+      "cantDelete": "该用户不能删除!",
+      "usernameExists": "用户名已存在!"
     },
     "lang": {
       "notFound": "指定语言未找到"

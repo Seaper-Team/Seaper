@@ -5,12 +5,16 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户实体
  * @author Xiaoyi311
  * @apiDefine UserData
+ * @apiBody {String} username 要注册的用户名
+ * @apiBody {String} password 要注册的密码 (应为MD5)
  * @apiError UsernameNotBlank 用户名不能为空
  * @apiError PasswordNotBlank 密码不能为空
  * @apiError PasswordNotMd5 密码不是 Md5
@@ -42,26 +46,30 @@ public class User {
     /**
      * UUID
      */
-    public String uuid;
+    public String uuid = UUID.randomUUID().toString();
+
     /**
      * 用户名
      */
     @NotBlank(message = "user.usernameNull")
     public String username;
+
     /**
      * 密码
      */
     @NotBlank(message = "user.passwordNull")
     @Size(min = 32, message = "user.passwordNotMd5", max = 32)
     public String password;
+
     /**
      * 注册时间
      */
-    public long registerTime;
+    public long registerTime = System.currentTimeMillis();
+
     /**
      * 权限
      */
-    public List<String> permissions;
+    public List<String> permissions = new ArrayList<>();
 
     /**
      * 实例化
@@ -70,7 +78,6 @@ public class User {
         this.uuid = uuid;
         this.username = username;
         this.password = password;
-        this.registerTime = System.currentTimeMillis();
         this.permissions = permissions;
     }
 }

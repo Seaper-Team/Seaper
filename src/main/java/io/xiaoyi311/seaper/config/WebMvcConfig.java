@@ -1,11 +1,13 @@
 package io.xiaoyi311.seaper.config;
 
 import io.xiaoyi311.seaper.interceptor.PermissionInterceptor;
+import io.xiaoyi311.seaper.interceptor.UserDataInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -19,17 +21,23 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
     /**
-     * 注解拦截器
+     * 注解拦截器1
      */
     @Autowired
-    PermissionInterceptor annotationInterceptor;
+    PermissionInterceptor annotationInterceptor1;
+
+    /**
+     * 注解拦截器2
+     */
+    @Autowired
+    UserDataInterceptor annotationInterceptor2;
 
     /**
      * 注入注解拦截器
      */
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(annotationInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(annotationInterceptor1).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 
@@ -52,5 +60,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(0, new MappingJackson2HttpMessageConverter());
+    }
+
+    /**
+     * 添加参数修改器
+     */
+    @Override
+    protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(annotationInterceptor2);
     }
 }

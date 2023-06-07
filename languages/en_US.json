@@ -10,8 +10,9 @@
       "405": "You Can't Use This Method :("
     },
     "console": {
-      "createUser": "Create User -> ",
-      "loginUser": "User Login Successful -> {0} : {1}",
+      "createUser": "{0}: Create User -> {1}",
+      "removeUser": "{0}: Remove User -> {1}",
+      "loginUser": "User Login Successful -> {0}({1})",
       "langChange": "Deafault Language Changed ->"
     },
     "dataFile": {
@@ -19,6 +20,7 @@
       "createUserDataError": "Create user data error: ",
       "writeUserDataError": "Write user data error: ",
       "readUsersDataError": "Can't Read Users Data: {0}, No user data will be loaded!",
+      "removeUserDataError": "Can't Delete Users Data: {0}，User can't delete!",
       "userDataLoaded": "User data reading completed, a total of {0} users loaded!",
       "folderIsFile": "This is not a folder, It's a file! "
     },
@@ -27,7 +29,10 @@
       "loginRefuse": "Username or password error!",
       "usernameNull": "Username cant be null!",
       "passwordNull": "Password cant be null!",
-      "passwordNotMd5": "Password need md5!"
+      "passwordNotMd5": "Password need md5!",
+      "notFound": "User Not Found!",
+      "cantDelete": "User Cant Delete!",
+      "usernameExists": "Username Exists!"
     },
     "lang": {
       "notFound": "Language Not Found!"

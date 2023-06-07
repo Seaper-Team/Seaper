@@ -1,6 +1,7 @@
 package io.xiaoyi311.seaper.controller;
 
 import io.xiaoyi311.seaper.annotation.Permission;
+import io.xiaoyi311.seaper.annotation.UserData;
 import io.xiaoyi311.seaper.exception.BadRequestException;
 import io.xiaoyi311.seaper.exception.DataFileException;
 import io.xiaoyi311.seaper.exception.ErrorPageException;
@@ -8,7 +9,6 @@ import io.xiaoyi311.seaper.model.PageData;
 import io.xiaoyi311.seaper.model.User;
 import io.xiaoyi311.seaper.service.LangManager;
 import io.xiaoyi311.seaper.service.UserManager;
-import io.xiaoyi311.seaper.utils.PageUtil;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +31,6 @@ public class UserController {
      * @apiGroup User
      * @apiPermission none
      * @apiDescription 用于初始化整个用户系统, 通常用在第一次启动 Seaper, 新建的账户为超级管理员账户
-     * @apiBody {String} username 要注册的用户名
-     * @apiBody {String} password 要注册的密码 (应为MD5)
      * @apiParamExample {json} 参数请求示例
      *  {
      *      "username":"test"
@@ -69,7 +67,7 @@ public class UserController {
         }
 
         //新建用户
-        UserManager.create(user.username, user.password);
+        UserManager.create(user.username, user.password, "Seaper User Manager");
         return "OK";
     }
 
@@ -110,30 +108,114 @@ public class UserController {
             throw new BadRequestException(LangManager.msg(Objects.requireNonNull(errors.getFieldError()).getDefaultMessage()));
         }
 
-        //获取用户 UUID 数据
-        Object[] uuids = UserManager.users.keySet().toArray();
-        int total = PageUtil.total(args.show, uuids);
-        List<Object> uuidList = PageUtil.get(args.page, args.show, uuids);
+        //返回最终数据
+        return UserManager.getPageList(args.show, args.page);
+    }
 
-        //判断页面是否不存在
-        if(uuidList == null){
-            throw new ErrorPageException(args.page, total);
+    /**
+     * 删除用户
+     * @api {DELETE} /user/remove 删除存在的用户
+     * @apiName 删除存在的用户
+     * @apiUse ResData
+     * @apiGroup User
+     * @apiPermission user.remove
+     * @apiDescription 根据 UUID 删除一位用户
+     * @apiParam {String} uuid 要删除用户的 UUID
+     * @apiSuccess {String} data 成功应返回 OK
+     * @apiSuccessExample {json} 成功
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "status":200,
+     *      "time":0,
+     *      "data":"OK"
+     *  }
+     * @apiError UserNotFound 指定目标未找到
+     * @apiErrorExample {json} 错误-目标未找到
+     *  HTTP/1.1 400 Bad Request
+     *  {
+     *      "status":400,
+     *      "time":0,
+     *      "data":"User Not Found!"
+     *  }
+     * @apiError UserCantDelete 用户无法删除
+     * @apiErrorExample {json} 错误-无法删除
+     *  HTTP/1.1 400 Bad Request
+     *  {
+     *      "status":400,
+     *      "time":0,
+     *      "data":"User Cant Delete!"
+     *  }
+     * @apiVersion 0.0.2
+     */
+    @DeleteMapping("/remove")
+    @Permission("user.remove")
+    public String remove(@UserData User user, String uuid) throws BadRequestException, DataFileException {
+        //该用户是否为当前账户
+        if(Objects.equals(user.uuid, uuid)){
+            throw new BadRequestException(LangManager.msg("user.cantDelete"));
         }
 
-        //转换所有数据
-        uuidList.replaceAll(o -> {
-            try {
-                return UserManager.getByUUID(o.toString());
-            } catch (DataFileException e) {
-                return new User(o.toString(), "error", "error", new ArrayList<>());
-            }
-        });
+        //尝试删除用户
+        if(!UserManager.remove(uuid, user.uuid)){
+            throw new BadRequestException(LangManager.msg("user.notFound"));
+        }
 
-        //返回最终数据
-        return new PageData(
-                total,
-                args.page,
-                uuidList
-        );
+        return "OK";
+    }
+
+    /**
+     * 新建用户
+     * @api {PUT} /user/create 新建一个用户
+     * @apiName 新建一个用户
+     * @apiUse ResData
+     * @apiUse UserData
+     * @apiGroup User
+     * @apiPermission user.create
+     * @apiDescription 根据用户信息新建一个用户
+     * @apiBody {Array} [permissions] 拥有的权限
+     * @apiParamExample {json} 参数请求示例
+     *  {
+     *      "username":"test"
+     *      "password":"testPassword",
+     *      "permission":["*"]
+     * @apiError UsernameExists 用户名已存在
+     * @apiErrorExample {json} 错误-用户名已存在
+     *  HTTP/1.1 400 Bad Request
+     *  {
+     *      "status":400,
+     *      "time":0,
+     *      "data":"Username Exists!"
+     *  }
+     * @apiSuccess {String} data 成功应返回 OK
+     * @apiSuccessExample {json} 成功
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "status":200,
+     *      "time":0,
+     *      "data":"OK"
+     *  }
+     * @apiVersion 0.0.2
+     */
+    @PutMapping("/create")
+    @Permission("user.create")
+    public String create(@UserData User user, @Valid @RequestBody User createUser, BindingResult errors) throws BadRequestException, DataFileException {
+        //是否校验失败
+        if(errors.hasErrors()){
+            throw new BadRequestException(LangManager.msg(Objects.requireNonNull(errors.getFieldError()).getDefaultMessage()));
+        }
+
+        //是否用户名重复
+        if(UserManager.users.containsValue(createUser.username)){
+            throw new BadRequestException(LangManager.msg("user.usernameExists"));
+        }
+
+        //防止固定数据篡改
+        createUser.permissions = createUser.permissions == null ? new ArrayList<>() : createUser.permissions;
+        createUser.registerTime = System.currentTimeMillis();
+        createUser.uuid = UUID.randomUUID().toString();
+
+        //新建用户
+        UserManager.create(createUser, user.uuid);
+        return "OK";
     }
 }

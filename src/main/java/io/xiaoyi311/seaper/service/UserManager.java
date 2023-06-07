@@ -4,7 +4,10 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import io.xiaoyi311.seaper.SeaperServerManager;
 import io.xiaoyi311.seaper.exception.DataFileException;
+import io.xiaoyi311.seaper.exception.ErrorPageException;
+import io.xiaoyi311.seaper.model.PageData;
 import io.xiaoyi311.seaper.model.User;
+import io.xiaoyi311.seaper.utils.PageUtil;
 import io.xiaoyi311.seaper.utils.PermissionUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +69,7 @@ public class UserManager {
                     User.class
             );
         } catch (IOException e) {
-            throw new DataFileException(LangManager.msg("dataFile.readUserDataError") + e.getMessage());
+            throw new DataFileException(LangManager.msg("dataFile.readUserDataError", e.getMessage()));
         }
     }
 
@@ -94,7 +97,7 @@ public class UserManager {
                     User.class
             );
         } catch (IOException e) {
-            log.error(LangManager.msg("dataFile.readUserDataError") + e.getMessage());
+            log.error(LangManager.msg("dataFile.readUserDataError", e.getMessage()));
             return null;
         }
 
@@ -134,9 +137,11 @@ public class UserManager {
      * 新建用户
      * @param username 用户名
      * @param password 密码
+     * @param who 谁更改的
      * @return 新建的用户
+     * @exception DataFileException 数据文件读写错误
      */
-    public static User create(String username, String password) throws DataFileException {
+    public static User create(String username, String password, String who) throws DataFileException {
         String uuid = UUID.randomUUID().toString();
         User user = new User(
                 uuid,
@@ -145,24 +150,29 @@ public class UserManager {
                 users.size() == 0 ? PermissionUtil.SuperAdmin : PermissionUtil.Default
         );
 
-        create(user);
+        create(user, who);
         return user;
     }
 
     /**
      * 新建用户
      * @param user 用户
+     * @param who 谁更改的
+     * @exception DataFileException 数据文件读写错误
      */
-    public static void create(User user) throws DataFileException {
-        set(user);
+    public static void create(User user, String who) throws DataFileException {
+        set(user, who);
         UserManager.users.put(user.uuid, user.username);
     }
 
     /**
      * 写入用户
      * @param user 用户信息
+     * @param who  谁更改的
+     * @exception DataFileException 数据文件读写错误
      */
-    public static void set(User user) throws DataFileException {
+    public static void set(User user, String who) throws DataFileException {
+        //解析路径
         Path userFile;
         try {
             userFile = Path.of(
@@ -170,22 +180,24 @@ public class UserManager {
                     user.uuid + ".json"
             );
         } catch (IOException e) {
-            throw new DataFileException(LangManager.msg("dataFile.readUserDataError") + e.getMessage());
+            throw new DataFileException(LangManager.msg("dataFile.readUserDataError", e.getMessage()));
         }
 
+        //文件是否存在
         if(!Files.exists(userFile)){
             try {
                 Files.createFile(userFile);
-                log.info(LangManager.msg("console.createUser") + user.uuid);
+                log.info(LangManager.msg("console.createUser", who, user.uuid));
             } catch (IOException e) {
-                throw new DataFileException(LangManager.msg("dataFile.createUserDataError") + e.getMessage());
+                throw new DataFileException(LangManager.msg("dataFile.createUserDataError", e.getMessage()));
             }
         }
 
+        //尝试写入
         try {
             Files.write(userFile, JSON.toJSONString(user).getBytes());
         } catch (IOException e) {
-            throw new DataFileException(LangManager.msg("dataFile.writeUserDataError") + e.getMessage());
+            throw new DataFileException(LangManager.msg("dataFile.writeUserDataError", e.getMessage()));
         }
     }
 
@@ -267,5 +279,78 @@ public class UserManager {
      */
     public static boolean checkPermissions(User user, String[] permissions){
         return PermissionUtil.checkPermissions(user.permissions, new ArrayList<>(List.of(permissions)));
+    }
+
+    /**
+     * 获取用户列表
+     * @param show 展示的数量
+     * @param page 页码
+     * @return 用户列表
+     * @throws ErrorPageException 页码数据错误
+     */
+    public static PageData getPageList(int show, int page) throws ErrorPageException {
+        //获取用户 UUID 数据
+        Object[] uuids = UserManager.users.keySet().toArray();
+        int total = PageUtil.total(show, uuids);
+        List<Object> uuidList = PageUtil.get(page, show, uuids);
+
+        //判断页面是否不存在
+        if(uuidList == null){
+            throw new ErrorPageException(page, total);
+        }
+
+        //转换所有数据
+        uuidList.replaceAll(o -> {
+            try {
+                return UserManager.getByUUID(o.toString());
+            } catch (DataFileException e) {
+                return new User(o.toString(), "error", "error", new ArrayList<>());
+            }
+        });
+
+        //返回最终数据
+        return new PageData(
+                total,
+                page,
+                uuidList
+        );
+    }
+
+    /**
+     * 删除用户
+     * @param uuid UUID
+     * @param who 谁更改的
+     * @return 是否成功
+     */
+    public static boolean remove(String uuid, String who) throws DataFileException {
+        //判断用户是否存在
+        if(!users.containsKey(uuid)){
+            return false;
+        }
+
+        //解析路径
+        Path userFile;
+        try {
+            userFile = Path.of(
+                    usersFolder.getFile().getCanonicalPath(),
+                    uuid + ".json"
+            );
+        } catch (IOException e) {
+            throw new DataFileException(LangManager.msg("dataFile.readUserDataError", e.getMessage()));
+        }
+
+        //文件是否存在
+        if(Files.exists(userFile)){
+            try {
+                Files.delete(userFile);
+                log.info(LangManager.msg("console.removeUser", who, uuid));
+            } catch (IOException e) {
+                throw new DataFileException(LangManager.msg("dataFile.removeUserDataError", e.getMessage()));
+            }
+        }
+
+        //删除缓存
+        users.remove(uuid);
+        return true;
     }
 }
