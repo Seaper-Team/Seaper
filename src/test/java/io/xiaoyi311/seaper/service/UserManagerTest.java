@@ -52,7 +52,7 @@ public class UserManagerTest {
         user.username = "test";
         user.password = "testPass";
 
-        UserManager.login(user, TempSession.temp);
+        UserManager.login(user, TempSession.temp, "127.0.0.1");
         if(!UserManager.isLogin(TempSession.temp)){
             throw new Exception("登陆失败");
         }

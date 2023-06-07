@@ -19,4 +19,14 @@ public class UserConfig {
      * 调试模式
      */
     public boolean debug = false;
+
+    /**
+     * 登录次数限制，为0则代表不检查
+     */
+    public Integer loginTryTime = 5;
+
+    /**
+     * 登录限制时间(秒)
+     */
+    public long loginStopTime = 60;
 }

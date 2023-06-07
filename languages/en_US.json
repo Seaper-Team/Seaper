@@ -32,7 +32,9 @@
       "passwordNotMd5": "Password need md5!",
       "notFound": "User Not Found!",
       "cantDelete": "User Cant Delete!",
-      "usernameExists": "Username Exists!"
+      "usernameExists": "Username Exists!",
+      "cantGetIP": "Unable to obtain the login user's IP. If you are accessing from an internal network, you can ignore it. If you are accessing from an external network, you need to pay attention!",
+      "loginTimeOut": "User {0} has logged in too many times! Login prohibited!"
     },
     "lang": {
       "notFound": "Language Not Found!"
