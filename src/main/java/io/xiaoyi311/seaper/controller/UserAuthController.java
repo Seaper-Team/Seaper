@@ -59,7 +59,11 @@ public class UserAuthController {
         }
 
         //是否登录失败
-        return UserManager.login(user, request.getSession()) ? "OK" : LangManager.msg("user.loginRefuse");
+        return UserManager.login(
+                user,
+                request.getSession(),
+                UserManager.getIpAddr(request)
+        ) ? "OK" : LangManager.msg("user.loginRefuse");
     }
 
     /**

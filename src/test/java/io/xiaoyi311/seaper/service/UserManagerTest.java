@@ -52,7 +52,7 @@ public class UserManagerTest {
         user.username = "test";
         user.password = "testPass";
 
-        UserManager.login(user, TempSession.temp);
+        UserManager.login(user, TempSession.temp, "127.0.0.1");
         if(!UserManager.isLogin(TempSession.temp)){
             throw new Exception("登陆失败");
         }
@@ -151,6 +151,20 @@ public class UserManagerTest {
 
         if(UserManager.isLogin(TempSession.temp)){
             throw new Exception("退出登录失败");
+        }
+    }
+
+    /**
+     * 删除用户
+     */
+    @Test
+    @Order(8)
+    @DisplayName("删除用户")
+    void removeUser() throws Exception {
+        User user = UserManager.getBySession(TempSession.temp);
+        assert user != null;
+        if(!UserManager.remove(user.uuid, "Test Manager")){
+            throw new Exception("删除用户失败");
         }
     }
 }

@@ -9,6 +9,7 @@ import io.xiaoyi311.seaper.model.PageData;
 import io.xiaoyi311.seaper.model.User;
 import io.xiaoyi311.seaper.utils.PageUtil;
 import io.xiaoyi311.seaper.utils.PermissionUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -32,6 +33,16 @@ public class UserManager {
      * 用户识别码列表
      */
     public static Map<String, String> users = new HashMap<>();
+
+    /**
+     * 登录失败用户数据
+     */
+    public static Map<String, Integer> loginBad = new HashMap<>();
+
+    /**
+     * 登录失败用户时间
+     */
+    public static Map<String, Long> loginBadTime = new HashMap<>();
 
     /**
      * 用户集目录
@@ -236,18 +247,49 @@ public class UserManager {
      * 登录
      * @param user 用户信息
      * @param session 对话信息
+     * @param ip 登录IP
      * @return 是否登录成功
      */
-    public static boolean login(User user, HttpSession session) {
+    public static boolean login(User user, HttpSession session, String ip) {
         User relUser = getByUsername(user.username);
 
-        //是否存在
-        if(relUser == null){
+        //无法获取IP
+        boolean canGet = true;
+        if(Objects.equals(ip, "")){
+            log.warn(LangManager.msg("user.cantGetIP"));
+            canGet = false;
+        }
+
+        //是否限制时间到
+        if(canGet){
+            Long badTime = loginBadTime.get(ip);
+            //限制时间到，解除限制
+            if(badTime != null && badTime + SeaperServerManager.userConfig.loginStopTime * 1000 < System.currentTimeMillis()){
+                loginBadTime.remove(ip);
+                loginBad.remove(ip);
+            }
+        }
+
+        //是否超出错误限制
+        Integer errorTime = loginBad.get(ip);
+        boolean isBadLogin = errorTime != null && errorTime >= SeaperServerManager.userConfig.loginTryTime;
+        if (canGet && SeaperServerManager.userConfig.loginTryTime > 0 && isBadLogin) {
+            //是否刚开始限制
+            if (errorTime.equals(SeaperServerManager.userConfig.loginTryTime)) {
+                log.warn(LangManager.msg("user.loginTimeOut", user.uuid));
+            }
             return false;
         }
 
         //是否登陆失败
-        if(!Objects.equals(relUser.password, user.password)){
+        if(relUser == null || !Objects.equals(relUser.password, user.password)){
+            if(canGet){
+                //是否刚开始限制
+                if(isBadLogin){
+                    loginBadTime.put(ip, System.currentTimeMillis());
+                }
+                loginBad.put(ip, errorTime != null ? errorTime + 1 : 1);
+            }
             return false;
         }
 
@@ -352,5 +394,34 @@ public class UserManager {
         //删除缓存
         users.remove(uuid);
         return true;
+    }
+
+    /**
+     * 获取真实 IP 地址
+     * @param request 请求数据
+     * @return IP
+     */
+    public static String getIpAddr(HttpServletRequest request) {
+        String ipAddress;
+        ipAddress = request.getHeader("x-forwarded-for");
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("Proxy-Client-IP");
+        }
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = "127.0.0.1".equals(request.getRemoteAddr()) ? "" : request.getRemoteAddr();
+        }
+        // 通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+        if (ipAddress != null) {
+            if (ipAddress.contains(",")) {
+                return ipAddress.split(",")[0];
+            } else {
+                return ipAddress;
+            }
+        } else {
+            return "";
+        }
     }
 }

@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * Seaper 主类
- * 0.0.2 剩余计划：性能信息查看，登录错误限制
+ * 0.0.2 剩余计划：性能信息查看
  * @author Xiaoyi311
  */
 @SpringBootApplication
