@@ -21,7 +21,6 @@ import java.util.List;
 
 /**
  * Seaper 主类
- * 0.0.2 剩余计划：性能信息查看
  * @author Xiaoyi311
  */
 @SpringBootApplication
@@ -43,6 +42,11 @@ public class SeaperServerManager {
 	public static UserConfig userConfig;
 
 	/**
+	 * 启动时间戳
+	 */
+	public static long runTime = 0;
+
+	/**
 	 * 入口点
 	 */
 	public static void main(String[] args) {
@@ -59,6 +63,7 @@ public class SeaperServerManager {
 		LangManager.initLanguage();
 		UserManager.initUsers();
 
+		runTime = System.currentTimeMillis();
 		SpringApplication.run(SeaperServerManager.class, args);
 	}
 

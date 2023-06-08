@@ -5,6 +5,7 @@ import io.xiaoyi311.seaper.exception.BadRequestException;
 import io.xiaoyi311.seaper.exception.BaseException;
 import io.xiaoyi311.seaper.model.ErrorData;
 import io.xiaoyi311.seaper.model.ResponseData;
+import io.xiaoyi311.seaper.service.SystemManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatusCode;
@@ -31,6 +32,7 @@ public class ResponseFormat implements ResponseBodyAdvice<Object> {
      */
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+        SystemManager.apiReqTime++;
         return true;
     }
 

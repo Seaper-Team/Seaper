@@ -35,6 +35,11 @@ public class UserManager {
     public static Map<String, String> users = new HashMap<>();
 
     /**
+     * 登陆失败次数
+     */
+    public static int loginBadTimes = 0;
+
+    /**
      * 登录失败用户数据
      */
     public static Map<String, Integer> loginBad = new HashMap<>();
@@ -43,6 +48,11 @@ public class UserManager {
      * 登录失败用户时间
      */
     public static Map<String, Long> loginBadTime = new HashMap<>();
+
+    /**
+     * 登陆成功次数
+     */
+    public static int loginSuccessTimes = 0;
 
     /**
      * 用户集目录
@@ -290,8 +300,18 @@ public class UserManager {
                 }
                 loginBad.put(ip, errorTime != null ? errorTime + 1 : 1);
             }
+
+            loginBadTimes++;
             return false;
         }
+
+        //如果已登录，且未失效，直接更新时间
+        try {
+            if(getBySession(session) != null){
+                session.setMaxInactiveInterval(30*60);
+                return true;
+            }
+        } catch (DataFileException ignored) {}
 
         //登录
         session.setAttribute("AUTH_login", true);
@@ -300,6 +320,7 @@ public class UserManager {
         session.setAttribute("AUTH_password", relUser.password);
         session.setMaxInactiveInterval(30*60);
         log.info(LangManager.msg("console.loginUser" , relUser.uuid, relUser.username));
+        loginSuccessTimes++;
         return true;
     }
 

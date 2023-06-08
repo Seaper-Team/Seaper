@@ -89,7 +89,7 @@ public class UserController {
      *      "data":{
      *          "total":1,
      *          "page":1,
-     *          "data":[{
+     *          "data": [{
      *              "uuid": "00000000-0000-0000-0000-000000000000",
      *              "username": "test",
      *              "password": "testPassword",
@@ -120,7 +120,7 @@ public class UserController {
      * @apiGroup User
      * @apiPermission user.remove
      * @apiDescription 根据 UUID 删除一位用户
-     * @apiParam {String} uuid 要删除用户的 UUID
+     * @apiQuery {String} uuid 要删除用户的 UUID
      * @apiSuccess {String} data 成功应返回 OK
      * @apiSuccessExample {json} 成功
      *  HTTP/1.1 200 OK
@@ -177,7 +177,7 @@ public class UserController {
      *  {
      *      "username":"test"
      *      "password":"testPassword",
-     *      "permission":["*"]
+     *      "permission": ["*"]
      * @apiError UsernameExists 用户名已存在
      * @apiErrorExample {json} 错误-用户名已存在
      *  HTTP/1.1 400 Bad Request
