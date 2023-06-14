@@ -72,6 +72,30 @@ public class UserController {
     }
 
     /**
+     * 是否初始化
+     * @api {GET} /user/init 是否已初始化用户系统
+     * @apiName 是否已初始化用户系统
+     * @apiUse ResData
+     * @apiUse UserData
+     * @apiGroup User
+     * @apiPermission none
+     * @apiDescription 查看 Seaper 是否已经初始化
+     * @apiSuccess {String} data 成功应返回 boolean，已初始化为 true，未初始化反之
+     * @apiSuccessExample {json} 成功
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "status":200,
+     *      "time":0,
+     *      "data":true
+     *  }
+     * @apiVersion 0.0.3
+     */
+    @GetMapping("/init")
+    public boolean isInit(){
+        return UserManager.users.size() > 0;
+    }
+
+    /**
      * 用户列表
      * @api {GET} /user/list 查看用户列表
      * @apiName 查看用户列表
