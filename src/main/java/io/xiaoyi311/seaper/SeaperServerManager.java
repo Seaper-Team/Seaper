@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * Seaper 主类
+ * 0.1.0：错误页面规范化，可连接后端，
  * @author Xiaoyi311
  */
 @SpringBootApplication
@@ -29,7 +30,7 @@ public class SeaperServerManager {
 	/**
 	 * 版本号
 	 */
-	public static Integer version = 2;
+	public static Integer version = 10;
 
 	/**
 	 * 配置读取

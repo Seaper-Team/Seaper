@@ -1,7 +1,7 @@
 {
   "Name": "Seaper Language - English",
   "Author": "SkyWorldStudio - Xiaoyi311",
-  "Version": "2",
+  "Version": "10",
   "backend": {
     "errorStatus": {
       "unknown" : "Unknown Error",
