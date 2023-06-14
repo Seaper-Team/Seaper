@@ -78,15 +78,6 @@ public class ResponseFormat implements ResponseBodyAdvice<Object> {
     }
 
     /**
-     * 页面未找到错误处理
-     */
-    @ExceptionHandler(value = NoHandlerFoundException.class)
-    @ResponseBody
-    public ResponseData<String> pageNotFound(){
-        return new ResponseData<>(404, ErrorData.C404.data);
-    }
-
-    /**
      * 其他程序正常错误处理
      */
     @ExceptionHandler(BaseException.class)
