@@ -25,6 +25,12 @@ public class PermissionInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //判断方法类型
+        if(!(handler instanceof  HandlerMethod)){
+            return true;
+        }
+
+        //转换数据
         Method method = ((HandlerMethod) handler).getMethod();
         Permission permission = method.getAnnotation(Permission.class);
 

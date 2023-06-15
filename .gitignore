@@ -2,6 +2,7 @@ HELP.md
 target/
 data/
 apidoc/
+public/
 .mvn/
 .run/
 !**/src/main/**/target/
