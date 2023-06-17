@@ -88,7 +88,7 @@ public class UserController {
      *      "time":0,
      *      "data":true
      *  }
-     * @apiVersion 0.0.3
+     * @apiVersion 0.1.0
      */
     @GetMapping("/init")
     public boolean isInit(){

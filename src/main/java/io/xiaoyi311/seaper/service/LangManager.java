@@ -1,6 +1,7 @@
 package io.xiaoyi311.seaper.service;
 
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import io.xiaoyi311.seaper.SeaperServerManager;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 国际化管理器
@@ -22,9 +25,9 @@ import java.util.List;
 @Slf4j
 public class LangManager {
     /**
-     * 语言列表
+     * 语言信息列表
      */
-    public static List<String> langs = new ArrayList<>();
+    public static Map<String, String> langInfos = new HashMap<>();
 
     /**
      * 语言集目录
@@ -54,12 +57,14 @@ public class LangManager {
 
         //遍历语言文件
         for (File lang : langs) {
-            LangManager.langs.add(lang.getName().replace(".json", ""));
+            String code = lang.getName().replace(".json", "");
+            String name = getLang(code, true).getString("Name");
+            langInfos.put(code, name);
         }
-        log.info("Language Files Found: " + StringUtils.join(LangManager.langs, ','));
+        log.info("Language Files Found: " + StringUtils.join(LangManager.langInfos.keySet(), ','));
 
         //显示使用语言信息
-        lang = getLang(SeaperServerManager.userConfig.lang);
+        lang = getLang(SeaperServerManager.userConfig.lang, false);
         if(lang != null){
             Integer langVer = lang.getInteger("Version");
             if(langVer < SeaperServerManager.version){
@@ -123,9 +128,9 @@ public class LangManager {
      * @param lang 语言代码
      * @return 语言数据
      */
-    public static JSONObject getLang(String lang){
+    public static JSONObject getLang(String lang, boolean init){
         //判断是否存在
-        if(!langs.contains(lang)){
+        if(!init && !langInfos.containsKey(lang)){
             return null;
         }
 
@@ -154,8 +159,8 @@ public class LangManager {
      */
     public static void setLang(String lang){
         //判断是否存在
-        if(langs.contains(lang)){
-            LangManager.lang = getLang(lang);
+        if(langInfos.containsKey(lang)){
+            LangManager.lang = getLang(lang, false);
         }
 
         log.info(msg("console.langChange") + lang);
@@ -167,5 +172,20 @@ public class LangManager {
      */
     public static JSONObject getFrontLang() {
         return lang.getJSONObject("front");
+    }
+
+    /**
+     * 获取语言列表
+     * @return 语言列表
+     */
+    public static JSONArray getList() {
+        JSONArray infos = new JSONArray();
+        for (Map.Entry<String, String> langInfo : langInfos.entrySet()) {
+            JSONObject info = new JSONObject();
+            info.put("code", langInfo.getKey());
+            info.put("name", langInfo.getValue());
+            infos.add(info);
+        }
+        return infos;
     }
 }

@@ -1,5 +1,6 @@
 package io.xiaoyi311.seaper.controller;
 
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import io.xiaoyi311.seaper.exception.BadRequestException;
 import io.xiaoyi311.seaper.service.LangManager;
@@ -65,7 +66,7 @@ public class LangController {
 
         //判断语言是否存在
         String lang = args.get("lang");
-        if(lang == null || !LangManager.langs.contains(lang)){
+        if(lang == null || !LangManager.langInfos.containsKey(lang)){
             throw new BadRequestException(msg("lang.notFound"));
         }
 
@@ -96,5 +97,29 @@ public class LangController {
     public JSONObject get(){
         //获取语言
         return LangManager.getFrontLang();
+    }
+
+    /**
+     * 获取前端语言数据
+     * @api {GET} /lang/get
+     * @apiName 获取前端语言数据
+     * @apiUse ResData
+     * @apiGroup Lang
+     * @apiPermission none
+     * @apiDescription 用于前端语言初始化，获取目前语言
+     * @apiSuccess {String} data 成功应返回前端语言的 json
+     * @apiSuccessExample {json} 成功
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "status":200,
+     *      "time":0,
+     *      "data":{}
+     *  }
+     * @apiVersion 0.1.0
+     */
+    @GetMapping("/list")
+    public JSONArray list(){
+        //获取语言
+        return LangManager.getList();
     }
 }
