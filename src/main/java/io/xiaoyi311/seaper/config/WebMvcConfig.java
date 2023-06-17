@@ -4,6 +4,7 @@ import io.xiaoyi311.seaper.interceptor.PermissionInterceptor;
 import io.xiaoyi311.seaper.interceptor.UserDataInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -78,7 +79,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("file:public/");
+                .addResourceLocations("file:./public/");
         super.addResourceHandlers(registry);
     }
 
@@ -87,7 +88,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:index.html");
+        registry.addViewController("/").setViewName("forward:/index.html");
         super.addViewControllers(registry);
     }
 }
