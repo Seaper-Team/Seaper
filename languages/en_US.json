@@ -13,7 +13,7 @@
       "createUser": "{0}: Create User -> {1}",
       "removeUser": "{0}: Remove User -> {1}",
       "loginUser": "User Login Successful -> {0}({1})",
-      "langChange": "Deafault Language Changed ->"
+      "langChange": "Deafault Language Changed -> "
     },
     "dataFile": {
       "readUserDataError": "Read user data error: ",
@@ -46,6 +46,34 @@
     }
   },
   "front": {
-    "test": "test"
+    "init": {
+      "p1-title": "Welcome to the Seaper Management System",
+      "p1-des": "Hi! Welcome to use Sealer! \nIt looks like you just started Seaper, let's start installing and booting!",
+      "p2-title": "Set your language",
+      "p2-des": "Can't you understand the current language? What language do you want to use? Select the language you need from the list below!",
+      "p2-sel": "Please select a language"
+      "p3-title": "Create admin account",
+      "p3-des": "It will be completed immediately. You need to create an administrator account first, which has all permissions. Please pay attention to saving!",
+      "p3-nameInput": "Please Input your username",
+      "p3-passInput": "Please Input your password",
+      "p4-title": "Initialize system complete",
+      "p4-des": "Done! The Seaper system has been initialized successfully! Please click on the \"Finish\" button to start using Seaper!"
+    },
+    "step": {
+      "start": "Start",
+      "next": "Next",
+      "over": "Finish"
+    },
+    "user": {
+      "username": "Username",
+      "password": "Password",
+      "usernameNull": "Username cannot be empty!",
+      "passwordNull": "Password cannot be empty!",
+      "passwordTooShort": "The password cannot be less than 5 digits!"
+    },
+    "error": {
+      "title": "Seaper Error",
+      "notSelectLang": "You haven't chosen any language!"
+    }
   }
 }

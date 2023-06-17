@@ -7,6 +7,7 @@ public/
 .run/
 !**/src/main/**/target/
 !**/src/test/**/target/
+over/
 
 ### STS ###
 .apt_generated
