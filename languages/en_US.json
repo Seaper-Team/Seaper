@@ -1,0 +1,77 @@
+{
+  "Name": "Seaper Language - English",
+  "Author": "SkyWorldStudio - Xiaoyi311",
+  "Version": "10",
+  "backend": {
+    "errorStatus": {
+      "403": "Permission Denied!",
+      "404": "Oh no, Page Not Found :(",
+      "405": "You Can't Use This Method :("
+    },
+    "console": {
+      "init": {
+        "logger-start": "Initiating Logger...",
+        "logger-over": "Logger initiated!",
+        "server-start": "Initiating Backend Server...",
+        "server-over": "Finished! Seaper is running at http://127.0.0.1:{0}!",
+        "user-start": "Initiating UserManager...",
+        "user-over": "UserManager initiated! Loaded {0} User Data!"
+      },
+      "createUser": "{0}({1}): Create User -> {2}({3})",
+      "removeUser": "{0}({1}): Remove User -> {2}({3})",
+      "loginUser": "User Login Successful -> {0}({1})",
+      "langChange": "{0}({1}): Default Language Changed -> {2}"
+    },
+    "user": {
+      "initiated": "Seaper has been initialized!",
+      "loginRefuse": "Wrong username or password!",
+      "usernameNull": "Username cannot be empty!",
+      "passwordNull": "Password cannot be empty!",
+      "passwordNotMd5": "The password requirement value is MD5!",
+      "notFound": "Users can't find it!",
+      "cantDelete": "This user cannot be deleted!",
+      "usernameExists": "Username already exists!",
+      "cantGetIP": "Unable to obtain the login user's IP. If you are accessing from an internal network, you can ignore it. If you are accessing from an external network, you need to pay attention!",
+      "loginTimeOut": "User {0} has logged in too many times! Login prohibited!"
+    },
+    "lang": {
+      "notFound": "Language Not Found!"
+    },
+    "other": {
+      "pageShowTooSmall": "Display at least one element on a page",
+      "pageTooSmall": "The minimum number of pages is 1",
+      "pageNotFound": "Page number not found"
+    }
+  },
+  "front": {
+    "init": {
+      "p1-title": "Welcome to the Seaper Management System",
+      "p1-des": "Hi! Welcome to use Sealer! \nIt looks like you just started Seaper, let's start installing and booting!",
+      "p2-title": "Set your language",
+      "p2-des": "Can't you understand the current language? What language do you want to use? Select the language you need from the list below!",
+      "p2-sel": "Please select a language",
+      "p3-title": "Create admin account",
+      "p3-des": "It will be completed immediately. You need to create an administrator account first, which has all permissions. Please pay attention to saving!",
+      "p3-nameInput": "Please Input your username",
+      "p3-passInput": "Please Input your password",
+      "p4-title": "Initialize system complete",
+      "p4-des": "Done! The Seaper system has been initialized successfully! Please click on the \"Finish\" button to start using Seaper!"
+    },
+    "step": {
+      "start": "Start",
+      "next": "Next",
+      "over": "Finish"
+    },
+    "user": {
+      "username": "Username",
+      "password": "Password",
+      "usernameNull": "Username cannot be empty!",
+      "passwordNull": "Password cannot be empty!",
+      "passwordTooShort": "The password cannot be less than 5 digits!"
+    },
+    "error": {
+      "title": "Seaper Error",
+      "notSelectLang": "You haven't chosen any language!"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "Name": "Seaper 语言 - 简体中文",
+  "Author": "SkyWorldStudio - Xiaoyi311",
+  "Version": "10",
+  "backend": {
+    "errorStatus": {
+      "403": "权限不足!",
+      "404": "啊哦, 页面未找到 :(",
+      "405": "你不能用这个方法请求此页面 :("
+    },
+    "console": {
+      "init": {
+        "logger-start": "正在初始化日志系统...",
+        "logger-over": "日志系统初始化完成!",
+        "server-start": "正在初始化后端服务器...",
+        "server-over": "完成! Seaper 已在 http://127.0.0.1:{0} 开始运行!",
+        "user-start": "正在初始化用户管理服务...",
+        "user-over": "用户管理服务初始化完成! 加载了 {0} 个用户数据!"
+      },
+      "createUser": "{0}({1}): 新建用户 -> {2}({3})",
+      "removeUser": "{0}({1}): 删除用户 -> {2}({3})",
+      "loginUser": "用户登录成功 -> {0}({1})",
+      "langChange": "{0}({1}): 默认语言更改 -> {2}"
+    },
+    "user": {
+      "initiated": "Seaper 已初始化!",
+      "loginRefuse": "用户名或密码错误!",
+      "usernameNull": "用户名不能为空!",
+      "passwordNull": "密码不能为空!",
+      "passwordNotMd5": "密码需要 MD5!",
+      "notFound": "用户找不到!",
+      "cantDelete": "该用户不能删除!",
+      "usernameExists": "用户名已存在!",
+      "cantGetIP": "无法获取到登陆者用户的 IP, 如果您是内网访问则可以无视, 如果是外网访问则需要引起重视!",
+      "loginTimeOut": "用户 {0} 登录次数过多! 已被禁止登陆!"
+    },
+    "lang": {
+      "notFound": "指定语言未找到"
+    },
+    "other": {
+      "pageShowTooSmall": "一个页面最少展示一个元素",
+      "pageTooSmall": "页数最小为 1",
+      "pageNotFound": "页码未找到"
+    }
+  },
+  "front": {
+    "init": {
+      "p1-title": "欢迎使用 Seaper 管理系统",
+      "p1-des": "Hi! 欢迎使用 Seaper!\n看起来您是刚刚启动 Seaper, 让我们开始安装引导吧!",
+      "p2-title": "设置您的语言",
+      "p2-des": "看不懂目前的语言吗? 想使用哪种语言? 在下面的列表中选择你需要的语言吧!",
+      "p2-sel": "请选择一个语言",
+      "p3-title": "创建管理员账户",
+      "p3-des": "马上即可完成, 您需要先创建一个管理员账户, 该账户拥有所有权限, 请注意保存!",
+      "p3-nameInput": "请输入您的用户名",
+      "p3-passInput": "请输入你的密码",
+      "p4-title": "初始化系统完成",
+      "p4-des": "完成! Seaper 系统已经初始化成功! 请点击 \"完成\" 按钮开始使用 Seaper 吧!"
+    },
+    "step": {
+      "start": "开始",
+      "next": "继续",
+      "over": "完成"
+    },
+    "user": {
+      "username": "用户名",
+      "password": "密码",
+      "usernameNull": "用户名不能为空!",
+      "passwordNull": "密码不能为空!",
+      "passwordTooShort": "密码不能少于 5 位!"
+    },
+    "error": {
+      "title": "Seaper 发生错误",
+      "notSelectLang": "你并未选择任何一个语言!"
+    }
+  }
+}
