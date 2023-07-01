@@ -55,4 +55,12 @@ export default new class LoggerManager {
         this.logger.addContext("class", from);
         this.logger.log(msg);
     }
+
+    /**
+     * 警告 输出信息
+     */
+    warn(msg: string, from: string){
+        this.logger.addContext("class", from);
+        this.logger.warn(msg);
+    }
 }

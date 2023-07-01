@@ -53,7 +53,7 @@ logger.initLogger();
 
 //初始化用户管理服务
 import userManager from './services/userManager';
-userManager.initUser();
+userManager.initUser(userConfig.loginStopTime, userConfig.loginTryTime);
 
 //初始化网页服务器
 import server from './utils/webServer';

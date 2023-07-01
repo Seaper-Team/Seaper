@@ -29,7 +29,7 @@
       "cantDelete": "该用户不能删除!",
       "usernameExists": "用户名已存在!",
       "cantGetIP": "无法获取到登陆者用户的 IP, 如果您是内网访问则可以无视, 如果是外网访问则需要引起重视!",
-      "loginTimeOut": "用户 {0} 登录次数过多! 已被禁止登陆!"
+      "loginTimeOut": "IP {0} 登录次数过多! 已被禁止登陆!"
     },
     "lang": {
       "notFound": "指定语言未找到"

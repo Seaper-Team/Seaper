@@ -13,4 +13,14 @@ export default class AppConfig{
      * 默认语言
      */
     lang: string = "zh_CN";
+
+    /**
+     * 登录失败封禁时长 (秒)
+     */
+    loginStopTime: number = 60 * 60;
+
+    /**
+     * 登录失败尝试次数
+     */
+    loginTryTime: number = 5;
 }
