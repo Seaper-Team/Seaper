@@ -35,14 +35,15 @@ export default class User {
      * 实例化
      */
     constructor(username: string, password: string);
-    constructor(username: string, password: string, uuid: string);
-    constructor(username: string, password: string, uuid: string, permissions: Array<string>, registerTime: number);
-    constructor(username: string, password: string, uuid?: string, permissions?: Array<string>, registerTime?: number){
+    constructor(username: string, password: string, permissions: Array<string>);
+    constructor(username: string, password: string, permissions: Array<string>, uuid: string);
+    constructor(username: string, password: string, permissions: Array<string>, uuid: string, registerTime: number);
+    constructor(username: string, password: string, permissions?: Array<string>, uuid?: string, registerTime?: number){
         this.uuid = uuid == undefined ? randomUUID() : uuid;
         this.username = username;
         this.password = password;
         this.registerTime = registerTime == undefined ? new Date().getTime() : registerTime;
-        this.permissions = permissions == undefined ? new Array<string>() : permissions;
+        this.permissions = permissions == undefined ? [] : permissions;
     }
 
     /**
@@ -52,26 +53,9 @@ export default class User {
         return new User(
             data.username,
             data.password,
-            data.uuid,
             data.permissions,
+            data.uuid,
             data.registerTime
         );
-    }
-
-    /**
-     * 校验数据
-     */
-    check(): string{
-        if(this.username == undefined){
-            return "user.usernameNull";
-        }
-        if(this.password == undefined){
-            return "user.passwordNull";
-        }
-        if(this.password.length != 32){
-            return "user.passwordNotMd5";
-        }
-
-        return "OK";
     }
 }

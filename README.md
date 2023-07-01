@@ -96,7 +96,7 @@ Seaper Server Manager (简称 Seaper) 是一个**全新的，全能的，简洁�
 
 ## 鸣谢
 
-- 感谢 **MCSM** 为本项目提供灵感
+- 感谢 **MCSM** 为本项目提供灵感、一部分的基础性代码
 - 感谢 **Pterodactyl** 为本项目提供灵感
 
 ## 开源协议

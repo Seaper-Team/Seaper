@@ -6,10 +6,13 @@
 import path from 'path';
 import i18n from './i18n';
 import logger from './logger';
-import express, { NextFunction, Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express';
+import session from "express-session";
 import responseRewrite from '../middlewares/responseRewrite';
 import router from '../routers/router';
 import bodyParser from 'body-parser';
+import stringRandom from 'string-random';
+import errorRewrite from '../middlewares/errorRewrite';
 
 export default new class WebServerManager {
     /**
@@ -29,6 +32,17 @@ export default new class WebServerManager {
         //Body JSON 解析器
         this.server.use(bodyParser.json());
 
+        //应用 Session 管理器
+        this.server.use(session({
+            name: "seaper",
+            secret: "SEAPER_SESSION_" + stringRandom(16, { numbers: true }),
+            saveUninitialized: false,
+            resave: false,
+            cookie: {
+                maxAge: 7 * 24 * 60 * 60 * 1000
+            }
+        }));
+
         //应用 API 路由
         this.server.use('/api', router);
 
@@ -41,7 +55,10 @@ export default new class WebServerManager {
             }
             next();
         });
-
+        
+        //应用错误重写
+        this.server.use(errorRewrite);
+        
         //应用返回统一化
         this.server.use(responseRewrite);
 

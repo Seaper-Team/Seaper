@@ -6,7 +6,7 @@
     "errorStatus": {
       "403": "权限不足!",
       "404": "啊哦, 页面未找到 :(",
-      "405": "你不能用这个方法请求此页面 :("
+      "400": "请求参数错误 :P"
     },
     "console": {
       "init": {
@@ -25,9 +25,6 @@
     "user": {
       "initiated": "Seaper 已初始化!",
       "loginRefuse": "用户名或密码错误!",
-      "usernameNull": "用户名不能为空!",
-      "passwordNull": "密码不能为空!",
-      "passwordNotMd5": "密码需要 MD5!",
       "notFound": "用户找不到!",
       "cantDelete": "该用户不能删除!",
       "usernameExists": "用户名已存在!",

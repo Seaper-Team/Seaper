@@ -6,7 +6,7 @@
     "errorStatus": {
       "403": "Permission Denied!",
       "404": "Oh no, Page Not Found :(",
-      "405": "You Can't Use This Method :("
+      "400": "Request parameters Error :P"
     },
     "console": {
       "init": {
@@ -25,9 +25,6 @@
     "user": {
       "initiated": "Seaper has been initialized!",
       "loginRefuse": "Wrong username or password!",
-      "usernameNull": "Username cannot be empty!",
-      "passwordNull": "Password cannot be empty!",
-      "passwordNotMd5": "The password requirement value is MD5!",
       "notFound": "Users can't find it!",
       "cantDelete": "This user cannot be deleted!",
       "usernameExists": "Username already exists!",

@@ -67,7 +67,7 @@ We welcome any **developer or user** to help us improve Seaper, send **PR** if y
 
 ## Acknowledgements
 
-- Thanks to **MCSM** for providing inspiration for this project.
+- Thanks to **MCSM** for providing inspiration for this project, a part of code.
 - Thanks to **Pterodactyl** for providing inspiration for this project.
 
 ## Open source protocol
