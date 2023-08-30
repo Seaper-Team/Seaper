@@ -27,7 +27,7 @@ import path from "path";
 import fs from "fs";
 if(!fs.existsSync(path.resolve(process.cwd(), "public/"))){
     console.log("[Development Mode] Hei! You Shouldn't Do This! This is Development Mode!");
-    console.log("[Development Mode] Please Download Seaper Production On https://seaper.skyworldstudio.top!");
+    console.log("[Development Mode] Please Download Seaper Production On https://project.skyworldstudio.top/seaper!");
     console.log("[Development Mode] If You Want Run Seaper in Development Mode, Please Create \"public\" folder in project folder!");
     process.exit();
 }
