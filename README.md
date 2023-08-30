@@ -1,9 +1,9 @@
 # Seaper Server Manager
 
-[![version](https://img.shields.io/github/v/release/Xiaoyi311/Seaper)](https://github.com/Xiaoyi311/Seaper/releases)
-[![issues](https://img.shields.io/github/issues/Xiaoyi311/Seaper)](https://github.com/Xiaoyi311/Seaper/issues)
-[![download](https://img.shields.io/github/downloads/Xiaoyi311/Seaper/total)](https://github.com/Xiaoyi311/Seaper/releases)
-[![license](https://img.shields.io/github/license/Xiaoyi311/Seaper.svg)](LICENSE)
+[![version](https://img.shields.io/github/v/release/Seaper-Team/Seaper)](https://github.com/Xiaoyi311/Seaper/releases)
+[![issues](https://img.shields.io/github/issues/Seaper-Team/Seaper)](https://github.com/Xiaoyi311/Seaper/issues)
+[![download](https://img.shields.io/github/downloads/Seaper-Team/Seaper/total)](https://github.com/Xiaoyi311/Seaper/releases)
+[![license](https://img.shields.io/github/license/Seaper-Team/Seaper.svg)](LICENSE)
 [![skyWorldStudio](https://img.shields.io/badge/Powered%20By-SkyWorldStudio-blue.svg?style=flat-square)](https://skyworldstudio.top)
 
 🌟 Seaper Server Manager - 一个全新的服务管理网页面板 🌟
