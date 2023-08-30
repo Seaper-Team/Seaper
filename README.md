@@ -77,13 +77,9 @@ Seaper Server Manager (简称 Seaper) 是一个**全新的，全能的，简洁�
 #### 五、启动命令
 启动命令为：`node app.js`
 
-## 使用方法
+## 使用方法 & API
 
 介于文件限制，详细用法见 [Seaper Wiki](https://github.com/Seaper-Team/Seaper-Docs)
-
-## API
-
-所有关于 Seaper 的 API 均可在 [Seaper API](https://github.com/Seaper-Team/Seaper-API) 查看
 
 ## 贡献者
 
