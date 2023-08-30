@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Xiaoyi311/Seaper.git"
+    "url": "git+https://github.com/Seaper-Team/Seaper.git"
   },
   "author": "Xiaoyi311 & SWS",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/Xiaoyi311/Seaper/issues"
+    "url": "https://github.com/Seaper-Team/Seaper/issues"
   },
-  "homepage": "https://github.com/Xiaoyi311/Seaper#readme",
+  "homepage": "https://github.com/Seaper-Team/Seaper#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
