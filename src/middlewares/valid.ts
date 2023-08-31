@@ -2,7 +2,7 @@
  * 类型校验
  * @author Xiaoyi311 unitwk
  * Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
- * 由 Xiaoyi311 修改并适配 Express
+ * 由 Xiaoyi311 修改
  */
 
 import { NextFunction, Request, Response } from "express";
