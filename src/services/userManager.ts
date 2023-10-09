@@ -8,6 +8,7 @@ import fs from "fs";
 import path from "path";
 import logger from "../utils/logger";
 import i18n from "../utils/i18n";
+import assert from "assert";
 
 export default new class UserManager {
     /**
@@ -155,10 +156,10 @@ export default new class UserManager {
     /**
      * 登录用户
      */
-    login(user: User, session: any, ip: string): boolean{
+    login(user: User, session: any, ip?: string): boolean{
         //IP 检测
-        if(!this.ipCheck(ip, false)){
-            this.ipBad(ip, true);
+        if(!this.ipCheck(false, ip)){
+            this.ipBad(true, ip);
             return false;
         }
 
@@ -167,13 +168,13 @@ export default new class UserManager {
 
         //是否用户不存在
         if(!relUser){
-            this.ipBad(ip, false);
+            this.ipBad(false, ip);
             return false;
         }
 
         //是否登录失败
         if(relUser.password != user.password){
-            this.ipBad(ip, false);
+            this.ipBad(false, ip);
             return false;
         }
 
@@ -192,9 +193,9 @@ export default new class UserManager {
     /**
      * IP 检测
      */
-    ipCheck(ip: string, onlyCheck: boolean): boolean{
+    ipCheck(onlyCheck: boolean, ip?: string): boolean{
         //是否读取不到 IP
-        if(ip == ""){
+        if(ip == "" || ip == undefined){
             logger.warn(i18n.msg("user.cantGetIP"), "UserManager-Secure");
             return false;
         }
@@ -231,9 +232,10 @@ export default new class UserManager {
     /**
      * 增加 IP 错误次数
      */
-    ipBad(ip: string, first: boolean){
+    ipBad(first: boolean, ip?: string){
         //是否能读取到 IP
-        if(this.ipCheck(ip, true)){
+        if(this.ipCheck(true, ip)){
+            assert(ip != undefined);
             let errorTime = this.loginBad.get(ip);
             errorTime = errorTime ? errorTime : 0;
 

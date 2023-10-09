@@ -54,6 +54,21 @@
       "p4-title": "初始化系统完成",
       "p4-des": "完成! Seaper 系统已经初始化成功! 请点击 \"完成\" 按钮开始使用 Seaper 吧!"
     },
+    "login": {
+      "welcome": "欢迎使用",
+      "login": "登录",
+      "loginDes": "请输入您的 Seaper 账号及密码, 登录到 Seaper 管理后台\n如果需要注册新账号, 请登录管理员账号, 在用户管理页面新建账号",
+      "loginPanel": "登录面板",
+      "forget": "忘记密码",
+      "tips": "=-= 提示 =-=\n默认有 5 次登录尝试机会, 一旦超过 5 次 IP 会自动封禁，默认封禁 1 小时, 以实际情况为准! IP 封禁后此页面不会有提示, 只会在 Seaper 控制台日志内打印!",
+      "forgetDes": "不记着自己的 Seaper 面板密码了吗?",
+      "forgetT1": "如果您是您是子管理员/用户:",
+      "forgetD1": "请联系主管理员进入用户列表更改您的用户密码",
+      "forgetT2": "如果您是您是主管理员:",
+      "forgetD2": "请进入程序根目录, 删除 /data/users 文件夹, 重启 Seaper",
+      "forgetD3": "请注意! 以上操作会影响 **用户数据** 建议提前备份 **所有** 用户数据!",
+      "backLogin": "返回登录"
+    },
     "step": {
       "start": "开始",
       "next": "继续",
@@ -62,6 +77,8 @@
     "user": {
       "username": "用户名",
       "password": "密码",
+      "inputUsername": "请输入用户名",
+      "inputPassword": "请输入密码",
       "usernameNull": "用户名不能为空!",
       "passwordNull": "密码不能为空!",
       "passwordTooShort": "密码不能少于 5 位!"

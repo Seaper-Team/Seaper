@@ -57,7 +57,7 @@ function check(target: any, parameter: any) {
 
 //中间件
 export default function (params: ValidParameter) {
-    return (req: Request, res: Response, next: NextFunction) => {
+    return (req: Request, _res: Response, next: NextFunction) => {
         try {
             let success = true;
             if (params["params"] && !check(req.params, params["params"])) success = false;

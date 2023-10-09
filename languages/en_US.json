@@ -54,6 +54,21 @@
       "p4-title": "Initialize system complete",
       "p4-des": "Done! The Seaper system has been initialized successfully! Please click on the \"Finish\" button to start using Seaper!"
     },
+    "login": {
+      "welcome": "There is",
+      "login": "Login",
+      "loginDes": "Please enter your Seaper account info to login.\nIf you dont have a account, login to the admin account and create a new account",
+      "loginPanel": "Login",
+      "forget": "Forget?",
+      "tips": "=-= Tips =-=\nThe default login chance is 5 times. If the IP exceeds 5 times, it will be banned for 1 hour by default! After banned, No prompt for logging in after blocking, only printing on the console!",
+      "forgetDes": "Forget your Seaper account info?",
+      "forgetT1": "If you are a sub admin or user:",
+      "forgetD1": "Please contact the admin to login the Seaper and change your password",
+      "forgetT2": "If you are the primary admin:",
+      "forgetD2": "Please enter the program dir, delete /data/users folder, and restart Seaper",
+      "forgetD3": "Please pay attention! The above operations will affect **user data** It is recommended to backup **all** user data in advance!",
+      "backLogin": "Back to Login"
+    },
     "step": {
       "start": "Start",
       "next": "Next",
@@ -62,6 +77,8 @@
     "user": {
       "username": "Username",
       "password": "Password",
+      "inputUsername": "Plaease input your username",
+      "inputPassword": "Plaease input your password",
       "usernameNull": "Username cannot be empty!",
       "passwordNull": "Password cannot be empty!",
       "passwordTooShort": "The password cannot be less than 5 digits!"

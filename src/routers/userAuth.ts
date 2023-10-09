@@ -20,7 +20,7 @@ valid({body: {username: String, password: String}}),
     const user: User = new User(req.body.username, req.body.password);
 
     //登录
-    res.locals.data = userManager.login(user, req.session, "127.0.0.2") ? "OK" : i18n.msg("user.loginRefuse");
+    res.locals.data = userManager.login(user, req.session, req.socket.remoteAddress) ? "OK" : i18n.msg("user.loginRefuse");
     next();
     return;
 });
